@@ -24,6 +24,7 @@ table {
 button {
     margin-bottom: 1%;
     width: 5%;
+    cursor: pointer;
 }
 
 
@@ -67,4 +68,8 @@ button {
 .four{
     color:red;
     font-weight: bolder;
+}
+
+.hint-container{
+    cursor: pointer;
 }

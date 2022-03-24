@@ -7,13 +7,14 @@ const EMPTY = ' '
 
 
 // The model:
-//global:
+//globals:
 var gGame = {
     isOn: false,
     shownCount: 0,
     markedCount: 0,
     secsPassed: 0,
-    life: 3
+    life: 3,
+    hint: 3
 }
 
 
@@ -27,13 +28,16 @@ var gBoard;
 var gCells;
 var gIntervalID;
 var gStartTime = 0
-
+var isHintMode = false
 
 
 
 function initGame() {
     endTimer()
     gGame.life = 3
+    gGame.hint = 3
+    var elHint = document.querySelector('.hint-container span')
+    elHint.innerText = '🔑🔑🔑'
     var elLife = document.querySelector('.life span')
     elLife.innerText = '❤❤❤'
     gBoard = buildBoard(gBoard, gLevel.size)
@@ -187,14 +191,22 @@ function cellClicked(elCell, i, j) {
             setMinesNegsCount(gBoard)
             gGame.isOn = true
             startTimer()
-           
-        } else {
+
+        } if (gGame.isOn) {
             gBoard[i][j].isShown = true
             renderBoard(gBoard)
             checkGameOver()
         }
-        if (gBoard[i][j].minesAroundCount === EMPTY && !gBoard[i][j].isMine) {
-            expandShown(elCell, i, j)
+        if ( isHintMode) {
+            hintMode(i, j)
+        } else if (gBoard[i][j].minesAroundCount === EMPTY && !gBoard[i][j].isMine) {
+            console.log('isHintMode', isHintMode)
+            // if (isHintMode) {
+            //     hintMode(i, j)
+            
+                expandShown(elCell, i, j)
+            
+        }
         }
         if (gBoard[i][j].isMine) {
             console.log('gGame.life', gGame.life)
@@ -214,7 +226,7 @@ function cellClicked(elCell, i, j) {
     }
 
 
-}
+
 
 
 function checkIsMine() {
@@ -336,8 +348,6 @@ function startTimer() {
 function endTimer() {
     clearInterval(gIntervalID);
 }
-
-
 
 
 
