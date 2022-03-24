@@ -154,9 +154,12 @@ function renderBoard(board) {
         strHTML += '<tr>'
         for (var j = 0; j < board.length; j++) {
             var cell = board[i][j]
-            var className = (cell.isMine) ? 'mine' : 'free'
+            var className = (cell.isMine) ? 'mine' : ''
             var innerSymbol = (cell.isMine) ? MINE : cell.minesAroundCount
-            if (!cell.isShown) innerSymbol = EMPTY
+            if (!cell.isShown){
+                innerSymbol = EMPTY
+                className='cover'
+            } 
             else innerSymbol = innerSymbol
             if (cell.isMarked) innerSymbol = FLAG
 
@@ -172,7 +175,7 @@ function renderBoard(board) {
 
 
 function cellClicked(elCell, i, j) {
-    renderCell(i, j)
+    
     if (!gBoard[i][j].isMarked && !gBoard[i][j].isShown) {
         if (!gGame.isOn) {
             createMines(gBoard)
@@ -181,8 +184,10 @@ function cellClicked(elCell, i, j) {
             startTimer()
             // gGame.shownCount++
         } else {
+            
             gBoard[i][j].isShown = true
             renderBoard(gBoard)
+            // renderCell(i, j)
             // gGame.shownCount++
             checkGameOver()
             console.log('gGame.shownCount', gGame.shownCount)
@@ -210,15 +215,15 @@ function cellClicked(elCell, i, j) {
 
 }
 
-function renderCell(i, j){
-    var elCell = document.querySelector(`[data-i="${i}"][data-j="${j}"]`)
-    console.log('elCell:', elCell)
-    
-    elCell.classList.add('showed')
+// function renderCell(i, j){
+//     var elCell = document.querySelector(`[data-i="${i}"][data-j="${j}"]`)
     
     
+//     elCell.classList.add('showed')
+//     console.log('elCell:', elCell)
     
-}
+    
+// }
 
 function checkIsMine() {
     for (var i = 0; i < gBoard.length; i++) {

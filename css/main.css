@@ -1,19 +1,18 @@
-body{
+body {
     text-align: center;
+    background-color: rgb(236, 229, 229);
 }
 
-table{
+table {
     margin: auto;
-    background-color:black;
-    border: 20px;
-    padding: 1px;
+    /* background-color:gray; */
+  
+   
 }
 
-
-td {
+.board td {
     width: 30px;
     height: 30px;
-    background-color: grey;
     text-align: center;
     transition: 0.5s;
 }
@@ -22,35 +21,34 @@ td {
 
 
 
-button{
+button {
     margin-top: 1%;
     width: 5%;
 }
 
 
-.timer-container{
-    background-color:aliceblue;
+.timer-container {
+    background-color: aliceblue;
     border: 1px solid;
     width: 50px;
     height: 20px;
-margin-bottom: 5px;
-margin-left: 45%;
-display: inline-block;
+    margin-bottom: 5px;
+    margin-left: 45%;
+    display: inline-block;
 }
 
-.life{
+.life {
     margin-right: 45%;
     display: inline-block;
 }
 
-.status{
+.status {
     cursor: pointer;
 }
 
-/* .showed{
+  .showed {
     background-color: white;
-} */
-
-.free{
-    background-color: white;
+}
+.cover {
+    background-color: gray;
 }
