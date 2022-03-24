@@ -161,6 +161,11 @@ function renderBoard(board) {
                 className='cover'
             } 
             else innerSymbol = innerSymbol
+            if(innerSymbol===1) className='one'
+            if(innerSymbol===2) className='two'
+            if(innerSymbol===3) className='three'
+            if(innerSymbol===4) className='four'
+            
             if (cell.isMarked) innerSymbol = FLAG
 
             strHTML += `<td data-i="${i}" data-j="${j}" oncontextmenu="cellMarked(this,${i}, ${j})" onclick="cellClicked(this, ${i}, ${j})" class="${className}" >${innerSymbol}</td>`

@@ -52,3 +52,19 @@ button {
 .cover {
     background-color: gray;
 }
+
+.one{
+    color:blue;
+}
+.two{
+    color:green;
+    font-weight: bold;
+}
+.three{
+    color:orange;
+    font-weight: bold;
+}
+.four{
+    color:red;
+    font-weight: bolder;
+}
