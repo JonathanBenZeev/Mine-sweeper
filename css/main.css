@@ -1,0 +1,56 @@
+body{
+    text-align: center;
+}
+
+table{
+    margin: auto;
+    background-color:black;
+    border: 20px;
+    padding: 1px;
+}
+
+
+td {
+    width: 30px;
+    height: 30px;
+    background-color: grey;
+    text-align: center;
+    transition: 0.5s;
+}
+
+
+
+
+
+button{
+    margin-top: 1%;
+    width: 5%;
+}
+
+
+.timer-container{
+    background-color:aliceblue;
+    border: 1px solid;
+    width: 50px;
+    height: 20px;
+margin-bottom: 5px;
+margin-left: 45%;
+display: inline-block;
+}
+
+.life{
+    margin-right: 45%;
+    display: inline-block;
+}
+
+.status{
+    cursor: pointer;
+}
+
+/* .showed{
+    background-color: white;
+} */
+
+.free{
+    background-color: white;
+}
