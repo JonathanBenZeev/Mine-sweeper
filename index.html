@@ -11,8 +11,10 @@
 
 <body onload="initGame()">
     <h1>Mine Sweeper</h1>
+    <div> <button onclick="getLevel(this)">Easy</button> <button onclick="getLevel(this)">Medium</button> <button
+        onclick="getLevel(this)">Hard</button> </div>
     <div class="timer-container">
-        <span class="seconds">000</span>
+    <span class="seconds">0.000</span>  
     </div>
     <div class="life">Life:<span>❤❤❤</span></div>
     <div class="status" onclick="initGame()">😀</div>
@@ -20,8 +22,7 @@
         <tbody class="board"></tbody>
     </table>
 
-    <div> <button onclick="getLevel(this)">Easy</button> <button onclick="getLevel(this)">Medium</button> <button
-            onclick="getLevel(this)">Hard</button> </div>
+
 
 
     <script src="js/utilities.js"></script>

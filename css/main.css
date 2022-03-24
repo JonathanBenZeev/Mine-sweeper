@@ -22,7 +22,7 @@ table {
 
 
 button {
-    margin-top: 1%;
+    margin-bottom: 1%;
     width: 5%;
 }
 
@@ -33,7 +33,7 @@ button {
     width: 50px;
     height: 20px;
     margin-bottom: 5px;
-    margin-left: 45%;
+    margin-left: 40%;
     display: inline-block;
 }
 

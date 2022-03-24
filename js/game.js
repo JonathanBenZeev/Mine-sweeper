@@ -7,6 +7,7 @@ const EMPTY = ' '
 
 
 // The model:
+//global:
 var gGame = {
     isOn: false,
     shownCount: 0,
@@ -18,7 +19,7 @@ var gGame = {
 
 var gLevel = {
     size: 4,
-    mines: 2
+    mines: 3
 }
 
 var gBoard;
@@ -28,7 +29,7 @@ var gIntervalID;
 var gStartTime = 0
 
 
-// console.log('gSize', gSize)
+
 
 function initGame() {
     endTimer()
@@ -51,10 +52,6 @@ function buildBoard(board, boardSize) {
         board.push([i])
         for (var j = 0; j < boardSize; j++) {
             board[i][j] = createCell()
-            var currCell = board[i][j]
-            if (currCell.isMine) {
-                currCell = MINE
-            }
         }
     }
 
@@ -77,7 +74,7 @@ function getLevel(elBtn) {
     console.log('elBtn', elBtn)
     if (elBtn.innerText === 'Easy') {
         gLevel.size = 4
-        gLevel.mines = 2
+        gLevel.mines = 3
     }
     else if (elBtn.innerText === 'Medium') {
         gLevel.size = 8
@@ -156,20 +153,21 @@ function renderBoard(board) {
             var cell = board[i][j]
             var className = (cell.isMine) ? 'mine' : ''
             var innerSymbol = (cell.isMine) ? MINE : cell.minesAroundCount
-            if (!cell.isShown){
+            if (!cell.isShown) {
+
+                className = 'cover'
                 innerSymbol = EMPTY
-                className='cover'
-            } 
+            }
             else innerSymbol = innerSymbol
-            if(innerSymbol===1) className='one'
-            if(innerSymbol===2) className='two'
-            if(innerSymbol===3) className='three'
-            if(innerSymbol===4) className='four'
-            
+            if (innerSymbol === 1) className = 'one'
+            if (innerSymbol === 2) className = 'two'
+            if (innerSymbol === 3) className = 'three'
+            if (innerSymbol === 4) className = 'four'
+
             if (cell.isMarked) innerSymbol = FLAG
 
-            strHTML += `<td data-i="${i}" data-j="${j}" oncontextmenu="cellMarked(this,${i}, ${j})" onclick="cellClicked(this, ${i}, ${j})" class="${className}" >${innerSymbol}</td>`
-
+            strHTML += `<td oncontextmenu="cellMarked(this,${i}, ${j})" onclick="cellClicked(this, ${i}, ${j})" class="${className}" >${innerSymbol}</td>`
+            // data-i="${i}" data-j="${j}"
         }
         strHTML += '</tr>'
     }
@@ -180,22 +178,20 @@ function renderBoard(board) {
 
 
 function cellClicked(elCell, i, j) {
-    
+
+    console.log(elCell, i, j);
     if (!gBoard[i][j].isMarked && !gBoard[i][j].isShown) {
+
         if (!gGame.isOn) {
             createMines(gBoard)
             setMinesNegsCount(gBoard)
             gGame.isOn = true
             startTimer()
-            // gGame.shownCount++
+           
         } else {
-            
             gBoard[i][j].isShown = true
             renderBoard(gBoard)
-            // renderCell(i, j)
-            // gGame.shownCount++
             checkGameOver()
-            console.log('gGame.shownCount', gGame.shownCount)
         }
         if (gBoard[i][j].minesAroundCount === EMPTY && !gBoard[i][j].isMine) {
             expandShown(elCell, i, j)
@@ -220,15 +216,6 @@ function cellClicked(elCell, i, j) {
 
 }
 
-// function renderCell(i, j){
-//     var elCell = document.querySelector(`[data-i="${i}"][data-j="${j}"]`)
-    
-    
-//     elCell.classList.add('showed')
-//     console.log('elCell:', elCell)
-    
-    
-// }
 
 function checkIsMine() {
     for (var i = 0; i < gBoard.length; i++) {
@@ -273,7 +260,7 @@ function checkGameOver() {
     }
 
     checkVictory()
-   
+
 }
 
 function checkVictory() {
@@ -291,7 +278,7 @@ function checkVictory() {
                         endTimer()
                         var elStatus = document.querySelector('.status')
                         elStatus.innerText = '😍'
-                        
+
                     }
 
                 }
@@ -341,7 +328,7 @@ function startTimer() {
     gStartTime = Date.now()
     gIntervalID = setInterval(function () {
         var timeDiff = Date.now() - gStartTime
-        elSeconds.innerText = timeDiff;
+        elSeconds.innerText = timeDiff / 1000;
 
     }, 100);
 }
