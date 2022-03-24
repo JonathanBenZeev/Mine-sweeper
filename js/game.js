@@ -19,8 +19,8 @@ var gGame = {
 
 
 var gLevel = {
-    size: 4,
-    mines: 3
+    size: 8,
+    mines: 12
 }
 
 var gBoard;
@@ -73,6 +73,7 @@ function createMines(board) {
     }
 
 }
+
 
 function getLevel(elBtn) {
     console.log('elBtn', elBtn)
@@ -197,33 +198,27 @@ function cellClicked(elCell, i, j) {
             renderBoard(gBoard)
             checkGameOver()
         }
-        if ( isHintMode) {
+        if (isHintMode) {
             hintMode(i, j)
         } else if (gBoard[i][j].minesAroundCount === EMPTY && !gBoard[i][j].isMine) {
-            console.log('isHintMode', isHintMode)
-            // if (isHintMode) {
-            //     hintMode(i, j)
-            
-                expandShown(elCell, i, j)
-            
-        }
-        }
-        if (gBoard[i][j].isMine) {
-            console.log('gGame.life', gGame.life)
-            //model
-            gGame.life--
-            //dom
-            var elLife = document.querySelector('.life span')
-            if (gGame.life === 2) elLife.innerText = '❤❤'
-            else if (gGame.life === 1) elLife.innerText = '❤'
-            else if (gGame.life === 0) {
-                elLife.innerText = ''
-                checkIsMine()
-                checkGameOver()
-                renderBoard(gBoard)
-            }
+            expandShown(elCell, i, j)
         }
     }
+    if (gBoard[i][j].isMine) {
+        //model
+        gGame.life--
+        //dom
+        var elLife = document.querySelector('.life span')
+        if (gGame.life === 2) elLife.innerText = '❤❤'
+        else if (gGame.life === 1) elLife.innerText = '❤'
+        else if (gGame.life === 0) {
+            elLife.innerText = ''
+            checkIsMine()
+            checkGameOver()
+            renderBoard(gBoard)
+        }
+    }
+}
 
 
 
@@ -261,6 +256,7 @@ function checkGameOver() {
                 if (gBoard[i][j].isMine && gBoard[i][j].isShown && gGame.life === 0) {
                     console.log('gGame.life', gGame.life)
                     console.log('you lost');
+
                     var elStatus = document.querySelector('.status')
                     elStatus.innerText = '😭'
                     endTimer()
@@ -298,10 +294,7 @@ function checkVictory() {
             }
 
         }
-
     }
-
-
 }
 
 
@@ -312,25 +305,19 @@ function checkNeighbors(cellI, cellJ, mat) {
         for (var j = cellJ - 1; j <= cellJ + 1; j++) {
             if (i === cellI && j === cellJ) continue;
             if (j < 0 || j >= mat[i].length) continue;
-
             if (!mat[i][j].isShown && mat[i][j].minesAroundCount && !mat[i][j].isMine) {
                 mat[i][j].isShown = true
 
             }
-
-            // console.log(mat[i][j].isShown);
         }
     }
-
 }
 
 
 function expandShown(elCell, i, j) {
-
     checkNeighbors(i, j, gBoard)
     renderBoard(gBoard)
     checkGameOver()
-    // console.log(gGame.shownCount)
 }
 
 
