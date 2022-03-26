@@ -11,17 +11,18 @@
 
 <body onload="initGame()">
     <h1>Mine Sweeper</h1>
-    <div> <button onclick="getLevel(this)">Easy</button> <button onclick="getLevel(this)">Medium</button> <button
+    <div> <button class="easy" onclick="getLevel(this)">Easy</button> <button class="medium" onclick="getLevel(this)">Medium</button> <button button class="hard"
         onclick="getLevel(this)">Hard</button> </div>
     <div class="timer-container">
-    <span class="seconds">0.000</span>  
+        <span class="seconds">0.000</span>
     </div>
-    <div class="life">Life:<span>❤❤❤</span></div>
-    <div class="status" onclick="initGame()">😀</div>
+    <div class="life">Life:<span>❤❤❤</span>  </div>
+    <div class="status" onclick="initGame()">😀 </div>
     <table border="1" cellpadding="10">
         <tbody class="board"></tbody>
     </table>
-<div class="hint-container"> hint: <span onclick="playHintMode()">🔑🔑🔑</span></div>
+<div class="hint-container"> Hint: <span onclick="playHintMode()">🔑🔑🔑</span></div>
+<!-- <div class="safe-click" onclick="playSafeMode()">Safe click <span>3 clicks available</span></div> -->
 
 
 
